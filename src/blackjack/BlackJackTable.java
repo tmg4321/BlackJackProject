@@ -52,6 +52,10 @@ public class BlackJackTable {
 			}
 			else {
 				d.playsBjack(deck);
+				if (d.getScore() > 21) {
+					System.out.println("\n" +p.getName()+" is a winner!");
+				}
+				
 				if (p.getScore() > d.getScore()) {
 					System.out.println("\n" +p.getName()+" is a winner!");
 				}
@@ -61,7 +65,7 @@ public class BlackJackTable {
 				else {
 					System.out.println("\nDealer wins.");
 				}
-				System.out.println("Game Over. Play again? y or n: ");
+				System.out.println("\nGame Over. Play again? y or n: ");
 				String choice = kb.next().toLowerCase();
 				while (!(choice.equals("y")) && !(choice.equals("n"))) {
 					System.out.println("Invalid choice. y to continue, n to quit");

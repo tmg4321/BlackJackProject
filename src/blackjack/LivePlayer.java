@@ -1,5 +1,6 @@
 package blackjack;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -17,71 +18,70 @@ public class LivePlayer extends Player implements playsBlackjack {
 
 		sb.append(this.getName()).append(" is showing: ");
 		for (Card card : this.getHand()) {
-			sb.append(card.toString()+" ");
+			sb.append(card.toString() + " ");
 		}
-		System.out.println(sb + "\tfor a score of: " + this.score);
+		System.out.println(sb + "|\tfor a score of: " + this.score);
 	}
 
 	@Override
 	public List<Card> playsBjack(List<Card> deck) {
 		boolean keepGoing = true;
 		while (keepGoing) {
-			this.setScore(this.checkForAces(this.score));
 			if (this.score > 21) {
 				System.out.println("Busted! You've lost.");
 				keepGoing = false;
 				break;
 			} else if (this.score == 21) {
-				System.out.println("Blackjack! You've won.");
+				System.out.println("\nYou've won with a blackjack!");
 				keepGoing = false;
 				break;
-			} else {
-				System.out.println("Your score is " + this.score//
-					+ " Enter \"H\" to hit or \"S\" to stick");
+			} else if (this.score < 21) {
+				System.out.println("\nYour score is " + this.score//
+						+ " Enter \"h\" to hit or \"s\" to stick");
 				Scanner kb = new Scanner(System.in);
 				String choice = kb.nextLine().toLowerCase();
 				while (!(choice.equals("h")) && !(choice.equals("s"))) {
 					System.out.println("Invalid entry"//
-						+ "\nEnter \"H\" to hit or \"S\" to stick: ");
+							+ "\nEnter \"h\" to hit or \"s\" to stick: ");
 					choice = kb.nextLine().toLowerCase();
+					kb.close();
 				}
 				if (choice.equals("h")) {
 					Card newCard = deck.remove(0);
 					this.hand.add(newCard);
 					this.setScore(this.score + newCard.getRank().getPoints());
-					this.setScore(this.checkForAces(this.score));
 					this.showHand(0);
 					keepGoing = true;
-				}
-				else if (choice.equals("s")) {
+				} else if (choice.equals("s")) {
 					keepGoing = false;
+					break;
 				}
 			}
 		}
-		
 		return deck;
-	}
-	@Override
-	public int checkForAces(int score) {
-		List<Card> temp = this.getHand();
-		Card aceTest = new Card(Rank.ACE, Suit.SPADES);
-		while (score > 21) {
-			for (Card card : temp) {
-				if (card.getRank().equals(aceTest.getRank())) {
-					temp.remove(card);
-					score = score - 10;
-				} else {
-					return score;
-				}
-			}
-		}
-		return score;
 	}
 
 	public Integer getScore() {
-		return score;
+		if (score <= 21) {
+			return score;
+		} 
+		else if (score > 21) {//test for & adjust score for aces
+			Integer tempScore = score;
+			List<Card> temp = this.getHand();
+			Card aceTest = new Card(Rank.ACE, Suit.SPADES);
+			Iterator<Card> it = temp.iterator();
+				while(tempScore > 21 && it.hasNext()) {
+					Card c = it.next();
+					if (c.getRank().equals(aceTest.getRank())) {
+						temp.remove(c);
+						tempScore = tempScore - 10;
+					}
+				}
+			return score = tempScore;
+		} else {
+			return score;
+		}
 	}
-
 	public void setScore(Integer score) {
 		this.score = score;
 	}

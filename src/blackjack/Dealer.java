@@ -2,6 +2,7 @@ package blackjack;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 public class Dealer extends Player implements playsBlackjack {
@@ -61,7 +62,7 @@ public class Dealer extends Player implements playsBlackjack {
 		if (x == 0) {
 			System.out.print("\nDealer is showing: " + this.hand.get(1).getRank()//
 					+ this.hand.get(1).getSuit().suit);
-			System.out.println("|\tfor a score of: " + this.score);
+			System.out.println("\t|for a score of: " + this.score);
 		} else {
 			StringBuilder sb = new StringBuilder();
 
@@ -69,7 +70,7 @@ public class Dealer extends Player implements playsBlackjack {
 			for (Card card : this.getHand()) {
 				sb.append(card.toString());
 			}
-			System.out.println(sb + "|\tfor a score of: " + this.score);
+			System.out.println(sb + "\t|for a score of: " + this.score);
 		}
 
 	}
@@ -83,11 +84,31 @@ public class Dealer extends Player implements playsBlackjack {
 	}
 
 	public Integer getScore() {
-		return score;
+		if (score <= 21) {
+			return score;
+		} 
+		else if (score > 21) {//test for & adjust score for aces
+			Integer tempScore = score;
+			List<Card> temp = this.getHand();
+			Card aceTest = new Card(Rank.ACE, Suit.SPADES);
+			Iterator<Card> it = temp.iterator();
+				while(tempScore > 21 && it.hasNext()) {
+					Card c = it.next();
+					if (c.getRank().equals(aceTest.getRank())) {
+						temp.remove(c);
+						tempScore = tempScore - 10;
+					}
+				}
+			return score = tempScore;
+		} else {
+			return score;
+		}
 	}
 
+
+
 	public void setScore(Integer score) {
-		this.score = score;
+			this.score = score;
 	}
 
 	public List<Card> getHand() {
@@ -100,55 +121,35 @@ public class Dealer extends Player implements playsBlackjack {
 
 	@Override
 	public List<Card> playsBjack(List<Card> deck) {
-		boolean keepGoing = true;
 		this.setScore(this.score + this.hand.get(0).getRank().getPoints());
-		this.setScore(this.checkForAces(this.score));
 		this.showHand(1);
 
+		boolean keepGoing = true;
 		while (keepGoing) {
 			if (this.score > 21) {
-				System.out.println("Dealer busted!");
+				System.out.println("\nDealer busted!");
 				keepGoing = false;
 				break;
 			} else if (this.score == 21) {
-				System.out.println("Dealer has Blackjack!");
+				System.out.println("\nDealer has Blackjack!");
 				keepGoing = false;
 				break;
 			} else {
 				System.out.println("Dealer's score is: " + this.score);
 				if (this.score >= 17) {
-					System.out.println("Dealer sticks on 17 or more");
+					System.out.println("\nDealer sticks on 17 or more");
 					keepGoing = false;
 					break;
-				} else if (this.score < 17) {
+				} 
+				else {
 					Card newCard = deck.remove(0);
 					this.hand.add(newCard);
 					this.setScore(this.score + newCard.getRank().getPoints());
-					this.setScore(this.checkForAces(this.score));
 					this.showHand(1);
-					break;
 				}
 			}
 		}
 		return deck;
-	}
-
-	@Override
-	public int checkForAces(int score) {
-		List<Card> temp = this.getHand();
-		Card aceTest = new Card(Rank.ACE, Suit.SPADES);
-		while (score > 21) {
-			for (Card card : temp) {
-				if (card.getRank().equals(aceTest.getRank())) {
-					temp.remove(card);
-					score = score - 10;
-					break;
-				} else {
-					return score;
-				}
-			}
-		}
-		return score;
 	}
 
 }
