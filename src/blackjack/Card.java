@@ -14,7 +14,7 @@ public class Card {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append(rank).append(" ").append(suit.getSuit());
+		builder.append(rank).append(suit.getSuit()+ " ");
 		return builder.toString();
 	}
 

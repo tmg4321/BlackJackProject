@@ -22,7 +22,7 @@ public class BlackJackTable {
 		
 		boolean keepPlaying = true;
 		while (keepPlaying) {
-			System.out.println("Ok, " +p.getName()+ ", Let's play some "//
+			System.out.println("\nOk, " +p.getName()+ ", Let's play some "//
 				+ "blackjack");
 			List<List<Card>> shuttle = d.deals();
 			p.setHand(shuttle.remove(0));
@@ -37,14 +37,14 @@ public class BlackJackTable {
 			deck = p.playsBjack(deck);
 			whoseTurn = 1;
 			if (p.getScore() >= 21) {
-				System.out.println("Game Over. Play again? y or n: ");
-				String choice = kb.next().toLowerCase();
-				while (!(choice.equals("y")) || !(choice.equals("n"))) {
-					System.out.println("Invalid choice. y to continue, n to quit");
+				System.out.println("\nGame Over. Play again? y or n: ");
+				String choice = kb.nextLine().toLowerCase();
+				while (!(choice.equals("y")) && !(choice.equals("n"))) {
+					System.out.println("Invalid choice. \"y\" to continue, \"n\" to quit");
+					choice = kb.nextLine().toLowerCase();
 				}
 				if (choice.equals("y")) {
 					keepPlaying = true;
-					break;
 				} else if (choice.equals("n")) {
 					keepPlaying = false;
 					break;
@@ -53,22 +53,22 @@ public class BlackJackTable {
 			else {
 				d.playsBjack(deck);
 				if (p.getScore() > d.getScore()) {
-					System.out.println(p.getName()+" is a winner!");
+					System.out.println("\n" +p.getName()+" is a winner!");
 				}
 				else if (p.getScore() == d.getScore()) {
-					System.out.println("That's a push - no winner");
+					System.out.println("\nThat's a push - no winner");
 				}
 				else {
-					System.out.println("Dealer wins.");
+					System.out.println("\nDealer wins.");
 				}
 				System.out.println("Game Over. Play again? y or n: ");
 				String choice = kb.next().toLowerCase();
-				while (!(choice.equals("y")) || !(choice.equals("n"))) {
+				while (!(choice.equals("y")) && !(choice.equals("n"))) {
 					System.out.println("Invalid choice. y to continue, n to quit");
+					choice = kb.nextLine().toLowerCase();
 				}
 				if (choice.equals("y")) {
 					keepPlaying = true;
-					break;
 				} else if (choice.equals("n")) {
 					keepPlaying = false;
 					break;

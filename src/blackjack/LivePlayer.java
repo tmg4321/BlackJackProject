@@ -17,9 +17,9 @@ public class LivePlayer extends Player implements playsBlackjack {
 
 		sb.append(this.getName()).append(" is showing: ");
 		for (Card card : this.getHand()) {
-			sb.append(card.toString());
+			sb.append(card.toString()+" ");
 		}
-		System.out.println(sb + "\tscore: " + this.score);
+		System.out.println(sb + "\tfor a score of: " + this.score);
 	}
 
 	@Override
@@ -43,7 +43,7 @@ public class LivePlayer extends Player implements playsBlackjack {
 				while (!(choice.equals("h")) && !(choice.equals("s"))) {
 					System.out.println("Invalid entry"//
 						+ "\nEnter \"H\" to hit or \"S\" to stick: ");
-					choice = kb.nextLine();
+					choice = kb.nextLine().toLowerCase();
 				}
 				if (choice.equals("h")) {
 					Card newCard = deck.remove(0);
@@ -51,7 +51,7 @@ public class LivePlayer extends Player implements playsBlackjack {
 					this.setScore(this.score + newCard.getRank().getPoints());
 					this.setScore(this.checkForAces(this.score));
 					this.showHand(0);
-					break;
+					keepGoing = true;
 				}
 				else if (choice.equals("s")) {
 					keepGoing = false;
@@ -70,7 +70,6 @@ public class LivePlayer extends Player implements playsBlackjack {
 				if (card.getRank().equals(aceTest.getRank())) {
 					temp.remove(card);
 					score = score - 10;
-					break;
 				} else {
 					return score;
 				}

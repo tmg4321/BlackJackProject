@@ -59,17 +59,17 @@ public class Dealer extends Player implements playsBlackjack {
 	@Override
 	public void showHand(int x) {
 		if (x == 0) {
-			System.out.print("Dealer is showing: " + this.hand.get(1).getRank()//
+			System.out.print("\nDealer is showing: " + this.hand.get(1).getRank()//
 					+ this.hand.get(1).getSuit().suit);
-			System.out.println("\tscore: " + this.score);
+			System.out.println("|\tfor a score of: " + this.score);
 		} else {
 			StringBuilder sb = new StringBuilder();
 
-			sb.append("Dealer is showing: ");
+			sb.append("\nDealer is showing: ");
 			for (Card card : this.getHand()) {
 				sb.append(card.toString());
 			}
-			System.out.println(sb + "\tscore: " + this.score);
+			System.out.println(sb + "|\tfor a score of: " + this.score);
 		}
 
 	}
