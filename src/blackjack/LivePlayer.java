@@ -17,7 +17,7 @@ public class LivePlayer extends Player implements playsBlackjack {
 	public void showHand(int x) {
 		StringBuilder sb = new StringBuilder();
 
-		sb.append("\n"+this.getName()).append(" is showing: ");
+		sb.append("\n" + this.getName()).append(" is showing: ");
 		for (Card card : this.getHand()) {
 			sb.append(card.toString() + " ");
 		}
@@ -63,10 +63,15 @@ public class LivePlayer extends Player implements playsBlackjack {
 	}
 
 	public Integer getScore() {
+		score = 0;
+		for (Card card : this.getHand()) {
+			score = score + card.getRank().getPoints();
+		}
+
 		if (score <= 21) {
 			return score;
 		} 
-		else if (score > 21) {//test for & adjust score for aces
+		else if (score > 21) {// test for & adjust score for aces
 			Integer tempScore = score;
 			List<Card> temp = new ArrayList<>();
 			for (Card card : this.getHand()) {
@@ -74,18 +79,20 @@ public class LivePlayer extends Player implements playsBlackjack {
 			}
 			Card aceTest = new Card(Rank.ACE, Suit.SPADES);
 			Iterator<Card> it = temp.iterator();
-				while(tempScore > 21 && it.hasNext()) {
-					Card c = it.next();
-					if (c.getRank().equals(aceTest.getRank())) {
-						temp.remove(c);
-						tempScore = tempScore - 10;
-					}
+			while (tempScore > 21 && it.hasNext()) {
+				Card c = it.next();
+				if (c.getRank().equals(aceTest.getRank())) {
+					temp.remove(c);
+					tempScore = tempScore - 10;
 				}
+			}
 			return score = tempScore;
-		} else {
+		} 
+		else {
 			return score;
 		}
 	}
+
 	public void setScore(Integer score) {
 		this.score = score;
 	}

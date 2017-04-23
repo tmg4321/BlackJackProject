@@ -60,7 +60,7 @@ public class Dealer extends Player implements playsBlackjack {
 		if (x == 0) {
 			System.out.print("\nDealer is showing: " + this.getHand().get(1).getRank()//
 					+ this.getHand().get(1).getSuit().suit);
-			System.out.println("\t|Current Score: " + this.getScore());
+			System.out.println("\t|Current Score: " + getHand().get(1).getRank().getPoints());
 		} else {
 			StringBuilder sb = new StringBuilder();
 
@@ -82,6 +82,11 @@ public class Dealer extends Player implements playsBlackjack {
 	}
 
 	public Integer getScore() {
+		score = 0;
+		for (Card card : this.getHand()) {
+			score = score + card.getRank().getPoints();
+		}
+
 		if (score <= 21) {
 			return score;
 		} 
@@ -106,7 +111,6 @@ public class Dealer extends Player implements playsBlackjack {
 			return score;
 		}
 	}
-
 	public void setScore(Integer score) {
 		this.score = score;
 	}
@@ -135,7 +139,6 @@ public class Dealer extends Player implements playsBlackjack {
 				keepGoing = false;
 				break;
 			} else {
-				System.out.println("\nDealer's score is: " + this.getScore());
 				if (this.getScore() >= 17) {
 					System.out.println("\nDealer sticks on 17 or more");
 					keepGoing = false;
