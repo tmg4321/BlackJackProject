@@ -16,30 +16,30 @@ public class LivePlayer extends Player implements playsBlackjack {
 	public void showHand(int x) {
 		StringBuilder sb = new StringBuilder();
 
-		sb.append(this.getName()).append(" is showing: ");
+		sb.append("\n"+this.getName()).append(" is showing: ");
 		for (Card card : this.getHand()) {
 			sb.append(card.toString() + " ");
 		}
-		System.out.println(sb + "|\tfor a score of: " + this.score);
+		System.out.println(sb + "|\tfor a score of: " + this.getScore());
 	}
 
 	@Override
 	public List<Card> playsBjack(List<Card> deck) {
 		boolean keepGoing = true;
 		while (keepGoing) {
-			if (this.score > 21) {
-				System.out.println("Busted! You've lost.");
+			if (this.getScore() > 21) {
+				System.out.println("\nBusted! You've lost.");
 				keepGoing = false;
 				break;
-			} else if (this.score == 21) {
+			} else if (this.getScore() == 21) {
 				System.out.println("\nYou've won with a blackjack!");
 				keepGoing = false;
 				break;
-			} else if (this.score < 21) {
+			} else if (this.getScore() < 21) {
 				System.out.println("\nYour score is " + this.score//
 						+ " Enter \"h\" to hit or \"s\" to stick");
 				Scanner kb = new Scanner(System.in);
-				String choice = kb.nextLine().toLowerCase();
+				String choice = kb.next().toLowerCase();
 				while (!(choice.equals("h")) && !(choice.equals("s"))) {
 					System.out.println("Invalid entry"//
 							+ "\nEnter \"h\" to hit or \"s\" to stick: ");
@@ -49,7 +49,7 @@ public class LivePlayer extends Player implements playsBlackjack {
 				if (choice.equals("h")) {
 					Card newCard = deck.remove(0);
 					this.hand.add(newCard);
-					this.setScore(this.score + newCard.getRank().getPoints());
+					this.setScore(this.getScore() + newCard.getRank().getPoints());
 					this.showHand(0);
 					keepGoing = true;
 				} else if (choice.equals("s")) {

@@ -62,7 +62,7 @@ public class Dealer extends Player implements playsBlackjack {
 		if (x == 0) {
 			System.out.print("\nDealer is showing: " + this.hand.get(1).getRank()//
 					+ this.hand.get(1).getSuit().suit);
-			System.out.println("\t|for a score of: " + this.score);
+			System.out.println("\t|for a score of: " + this.getScore());
 		} else {
 			StringBuilder sb = new StringBuilder();
 
@@ -70,7 +70,7 @@ public class Dealer extends Player implements playsBlackjack {
 			for (Card card : this.getHand()) {
 				sb.append(card.toString());
 			}
-			System.out.println(sb + "\t|for a score of: " + this.score);
+			System.out.println(sb + "\t|for a score of: " + this.getScore());
 		}
 
 	}
@@ -126,17 +126,17 @@ public class Dealer extends Player implements playsBlackjack {
 
 		boolean keepGoing = true;
 		while (keepGoing) {
-			if (this.score > 21) {
+			if (this.getScore() > 21) {
 				System.out.println("\nDealer busted!");
 				keepGoing = false;
 				break;
-			} else if (this.score == 21) {
+			} else if (this.getScore() == 21) {
 				System.out.println("\nDealer has Blackjack!");
 				keepGoing = false;
 				break;
 			} else {
-				System.out.println("Dealer's score is: " + this.score);
-				if (this.score >= 17) {
+				System.out.println("Dealer's score is: " + this.getScore());
+				if (this.getScore() >= 17) {
 					System.out.println("\nDealer sticks on 17 or more");
 					keepGoing = false;
 					break;
@@ -144,7 +144,7 @@ public class Dealer extends Player implements playsBlackjack {
 				else {
 					Card newCard = deck.remove(0);
 					this.hand.add(newCard);
-					this.setScore(this.score + newCard.getRank().getPoints());
+					this.setScore(this.getScore() + newCard.getRank().getPoints());
 					this.showHand(1);
 				}
 			}

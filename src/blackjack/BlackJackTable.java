@@ -31,6 +31,7 @@ public class BlackJackTable {
 			d.setHand(shuttle.remove(0));
 			d.setScore(d.getHand().get(1).getRank().getPoints());
 			deck = shuttle.remove(0);
+			
 			int whoseTurn = 0;
 			p.showHand(whoseTurn);
 			d.showHand(whoseTurn);
@@ -38,7 +39,7 @@ public class BlackJackTable {
 			whoseTurn = 1;
 			if (p.getScore() >= 21) {
 				System.out.println("\nGame Over. Play again? y or n: ");
-				String choice = kb.nextLine().toLowerCase();
+				String choice = kb.next().toLowerCase();
 				while (!(choice.equals("y")) && !(choice.equals("n"))) {
 					System.out.println("Invalid choice. \"y\" to continue, \"n\" to quit");
 					choice = kb.nextLine().toLowerCase();
@@ -55,8 +56,7 @@ public class BlackJackTable {
 				if (d.getScore() > 21) {
 					System.out.println("\n" +p.getName()+" is a winner!");
 				}
-				
-				if (p.getScore() > d.getScore()) {
+				else if (p.getScore() > d.getScore()) {
 					System.out.println("\n" +p.getName()+" is a winner!");
 				}
 				else if (p.getScore() == d.getScore()) {
