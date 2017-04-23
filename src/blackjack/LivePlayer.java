@@ -1,5 +1,6 @@
 package blackjack;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
@@ -20,7 +21,7 @@ public class LivePlayer extends Player implements playsBlackjack {
 		for (Card card : this.getHand()) {
 			sb.append(card.toString() + " ");
 		}
-		System.out.println(sb + "|\tfor a score of: " + this.getScore());
+		System.out.println(sb + "\t|Current Score: " + this.getScore());
 	}
 
 	@Override
@@ -32,23 +33,23 @@ public class LivePlayer extends Player implements playsBlackjack {
 				keepGoing = false;
 				break;
 			} else if (this.getScore() == 21) {
-				System.out.println("\nYou've won with a blackjack!");
+				System.out.println("\nYou've won with Blackjack!");
 				keepGoing = false;
 				break;
 			} else if (this.getScore() < 21) {
-				System.out.println("\nYour score is " + this.score//
-						+ " Enter \"h\" to hit or \"s\" to stick");
+				System.out.println("\nYour score is " + this.getScore()//
+						+ ". Enter \"h\" to hit or \"s\" to stick");
 				Scanner kb = new Scanner(System.in);
 				String choice = kb.next().toLowerCase();
 				while (!(choice.equals("h")) && !(choice.equals("s"))) {
 					System.out.println("Invalid entry"//
 							+ "\nEnter \"h\" to hit or \"s\" to stick: ");
-					choice = kb.nextLine().toLowerCase();
+					choice = kb.next().toLowerCase();
 					kb.close();
 				}
 				if (choice.equals("h")) {
 					Card newCard = deck.remove(0);
-					this.hand.add(newCard);
+					this.getHand().add(newCard);
 					this.setScore(this.getScore() + newCard.getRank().getPoints());
 					this.showHand(0);
 					keepGoing = true;
@@ -67,7 +68,10 @@ public class LivePlayer extends Player implements playsBlackjack {
 		} 
 		else if (score > 21) {//test for & adjust score for aces
 			Integer tempScore = score;
-			List<Card> temp = this.getHand();
+			List<Card> temp = new ArrayList<>();
+			for (Card card : this.getHand()) {
+				temp.add(card);
+			}
 			Card aceTest = new Card(Rank.ACE, Suit.SPADES);
 			Iterator<Card> it = temp.iterator();
 				while(tempScore > 21 && it.hasNext()) {

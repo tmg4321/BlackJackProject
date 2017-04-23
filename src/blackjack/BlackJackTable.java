@@ -23,7 +23,7 @@ public class BlackJackTable {
 		boolean keepPlaying = true;
 		while (keepPlaying) {
 			System.out.println("\nOk, " +p.getName()+ ", Let's play some "//
-				+ "blackjack");
+				+ "Blackjack!");
 			List<List<Card>> shuttle = d.deals();
 			p.setHand(shuttle.remove(0));
 			p.setScore(p.getHand().get(0).getRank().getPoints()//
@@ -38,11 +38,11 @@ public class BlackJackTable {
 			deck = p.playsBjack(deck);
 			whoseTurn = 1;
 			if (p.getScore() >= 21) {
-				System.out.println("\nGame Over. Play again? y or n: ");
+				System.out.print("\nGame Over. Play again? y or n: ");
 				String choice = kb.next().toLowerCase();
 				while (!(choice.equals("y")) && !(choice.equals("n"))) {
-					System.out.println("Invalid choice. \"y\" to continue, \"n\" to quit");
-					choice = kb.nextLine().toLowerCase();
+					System.out.print("Invalid choice. \"y\" to continue, \"n\" to quit");
+					choice = kb.next().toLowerCase();
 				}
 				if (choice.equals("y")) {
 					keepPlaying = true;
@@ -65,11 +65,11 @@ public class BlackJackTable {
 				else {
 					System.out.println("\nDealer wins.");
 				}
-				System.out.println("\nGame Over. Play again? y or n: ");
+				System.out.print("\nGame Over. Play again? y or n: ");
 				String choice = kb.next().toLowerCase();
 				while (!(choice.equals("y")) && !(choice.equals("n"))) {
-					System.out.println("Invalid choice. y to continue, n to quit");
-					choice = kb.nextLine().toLowerCase();
+					System.out.print("Invalid choice. y to continue, n to quit");
+					choice = kb.next().toLowerCase();
 				}
 				if (choice.equals("y")) {
 					keepPlaying = true;
@@ -81,7 +81,7 @@ public class BlackJackTable {
 			}
 		
 		}
-		System.out.println("Goodbye!");
+		System.out.println("\nGoodbye!");
 		kb.close();
 	}
 
