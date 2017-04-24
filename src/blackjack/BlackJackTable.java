@@ -39,10 +39,10 @@ public class BlackJackTable {
 			deck = p.playsBjack(deck);
 			whoseTurn = 1;
 			if (p.getScore() >= 21) {
-				System.out.println("\nGame Over. Play again? y or n: ");
+				System.out.print("\nGame Over. Play again? y or n: ");
 				String choice = kb.next().toLowerCase();
 				while (!(choice.equals("y")) && !(choice.equals("n"))) {
-					System.out.println("Invalid choice. \"y\" to continue, \"n\" to quit");
+					System.out.print("Invalid choice. \"y\" to continue, \"n\" to quit");
 					choice = kb.next().toLowerCase();
 				}
 				if (choice.equals("y")) {

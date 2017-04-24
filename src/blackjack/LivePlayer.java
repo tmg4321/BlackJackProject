@@ -49,8 +49,8 @@ public class LivePlayer extends Player implements playsBlackjack {
 				}
 				if (choice.equals("h")) {
 					Card newCard = deck.remove(0);
-					this.getHand().add(newCard);
-					this.setScore(this.getScore() + newCard.getRank().getPoints());
+					this.hand.add(newCard);
+					this.setScore(this.score + newCard.getRank().getPoints());
 					this.showHand(0);
 					keepGoing = true;
 				} else if (choice.equals("s")) {
@@ -68,11 +68,11 @@ public class LivePlayer extends Player implements playsBlackjack {
 			score = score + card.getRank().getPoints();
 		}
 
-		if (score <= 21) {
+		Integer tempScore = score;
+		if (tempScore <= 21) {
 			return score;
 		} 
-		else if (score > 21) {// test for & adjust score for aces
-			Integer tempScore = score;
+		else if (tempScore > 21) {// test for & adjust score for aces
 			List<Card> temp = new ArrayList<>();
 			for (Card card : this.getHand()) {
 				temp.add(card);

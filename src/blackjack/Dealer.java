@@ -87,11 +87,11 @@ public class Dealer extends Player implements playsBlackjack {
 			score = score + card.getRank().getPoints();
 		}
 
-		if (score <= 21) {
+		Integer tempScore = score;
+		if (tempScore <= 21) {
 			return score;
 		} 
-		else if (score > 21) {// test for & adjust score for aces
-			Integer tempScore = score;
+		else if (tempScore > 21) {// test for & adjust score for aces
 			List<Card> temp = new ArrayList<>();
 			for (Card card : this.getHand()) {
 				temp.add(card);
@@ -111,6 +111,7 @@ public class Dealer extends Player implements playsBlackjack {
 			return score;
 		}
 	}
+
 	public void setScore(Integer score) {
 		this.score = score;
 	}
