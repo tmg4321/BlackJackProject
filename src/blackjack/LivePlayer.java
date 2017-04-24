@@ -82,7 +82,6 @@ public class LivePlayer extends Player implements playsBlackjack {
 			while (tempScore > 21 && it.hasNext()) {
 				Card c = it.next();
 				if (c.getRank().equals(aceTest.getRank())) {
-					temp.remove(c);
 					tempScore = tempScore - 10;
 				}
 			}
