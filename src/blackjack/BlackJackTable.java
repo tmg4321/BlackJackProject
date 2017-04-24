@@ -30,13 +30,13 @@ public class BlackJackTable {
 			p.setHand(shuttle.remove(0));//player's hand
 			p.setScore(p.getHand().get(0).getRank().getPoints()//player's score
 				+ p.getHand().get(1).getRank().getPoints());
-			d.setHand(shuttle.remove(0));
-			d.setScore(d.getHand().get(1).getRank().getPoints());
-			deck = shuttle.remove(0);
+			d.setHand(shuttle.remove(0));//dealer's hand
+			d.setScore(d.getHand().get(1).getRank().getPoints());//dealer's score
+			deck = shuttle.remove(0);//deck less cards in hands
 			
 			int whoseTurn = 0;
-			p.showHand(whoseTurn);
-			d.showHand(whoseTurn);
+			p.showHand(whoseTurn);//showHand is interface method
+			d.showHand(whoseTurn);//showHand is interface method
 			deck = p.playsBjack(deck);//player plays on interface; returns a deck
 			whoseTurn = 1;
 			if (p.getScore() >= 21) {

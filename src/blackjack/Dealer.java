@@ -39,6 +39,7 @@ public class Dealer extends Player implements playsBlackjack {
 		List<Card> deck = getsADeck();
 
 		Collections.shuffle(deck);
+		
 		List<Card> playerHand = new ArrayList<>();
 		List<Card> dealerHand = new ArrayList<>();
 
