@@ -22,7 +22,7 @@ public class BlackJackTable {
 		
 		boolean keepPlaying = true;
 		while (keepPlaying) {
-			System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+			System.out.print("\n\n\n\n\n\n\n\n\n\n\n\n\n"); 
 			System.out.println("\nOk, " +p.getName()+ ", Let's play some "//
 				+ "Blackjack!");
 			List<List<Card>> shuttle = d.deals();

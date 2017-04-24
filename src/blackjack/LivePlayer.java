@@ -21,7 +21,7 @@ public class LivePlayer extends Player implements playsBlackjack {
 		for (Card card : this.getHand()) {
 			sb.append(card.toString() + " ");
 		}
-		System.out.println(sb + "\t|Current Score: " + this.getScore());
+		System.out.println(sb + "(Current Score: " + this.getScore()+")");
 	}
 
 	@Override

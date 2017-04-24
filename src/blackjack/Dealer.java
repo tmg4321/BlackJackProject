@@ -60,15 +60,15 @@ public class Dealer extends Player implements playsBlackjack {
 		if (x == 0) {
 			System.out.print("\nDealer is showing: " + this.getHand().get(1).getRank()//
 					+ this.getHand().get(1).getSuit().suit);
-			System.out.println("\t|Current Score: " + getHand().get(1).getRank().getPoints());
+			System.out.println(" (Current Score: " + getHand().get(1).getRank().getPoints()+")");
 		} else {
 			StringBuilder sb = new StringBuilder();
 
 			sb.append("\nDealer is showing: ");
 			for (Card card : this.getHand()) {
-				sb.append(card.toString());
+				sb.append(card.toString()+" ");
 			}
-			System.out.println(sb + "\t|Current Score: " + this.getScore());
+			System.out.println(sb + "(Current Score: " + this.getScore()+")");
 		}
 
 	}
