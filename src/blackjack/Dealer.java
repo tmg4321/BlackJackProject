@@ -91,7 +91,7 @@ public class Dealer extends Player implements playsBlackjack {
 		if (tempScore <= 21) {
 			return score;
 		} 
-		else if (tempScore > 21) {// test for & adjust score for aces
+		else if (tempScore > 21) {// test & adjust score for aces
 			List<Card> temp = new ArrayList<>();
 			for (Card card : this.getHand()) {
 				temp.add(card);

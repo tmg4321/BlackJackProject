@@ -18,16 +18,17 @@ public class BlackJackTable {
 	private void startAGame() {
 		System.out.print("Enter your name to begin: ");
 		Scanner kb = new Scanner(System.in);
-		p = new LivePlayer(kb.nextLine());
+		p = new LivePlayer(kb.nextLine());//construct player with name
 		
 		boolean keepPlaying = true;
 		while (keepPlaying) {
 			System.out.print("\n\n\n\n\n\n\n\n\n\n\n\n\n"); 
 			System.out.println("\nOk, " +p.getName()+ ", Let's play some "//
 				+ "Blackjack!");
+			//dealer deals - returns a shuttle of 2 hands and a deck
 			List<List<Card>> shuttle = d.deals();
-			p.setHand(shuttle.remove(0));
-			p.setScore(p.getHand().get(0).getRank().getPoints()//
+			p.setHand(shuttle.remove(0));//player's hand
+			p.setScore(p.getHand().get(0).getRank().getPoints()//player's score
 				+ p.getHand().get(1).getRank().getPoints());
 			d.setHand(shuttle.remove(0));
 			d.setScore(d.getHand().get(1).getRank().getPoints());
@@ -36,7 +37,7 @@ public class BlackJackTable {
 			int whoseTurn = 0;
 			p.showHand(whoseTurn);
 			d.showHand(whoseTurn);
-			deck = p.playsBjack(deck);
+			deck = p.playsBjack(deck);//player plays on interface; returns a deck
 			whoseTurn = 1;
 			if (p.getScore() >= 21) {
 				System.out.print("\nGame Over. Play again? y or n: ");
@@ -53,7 +54,7 @@ public class BlackJackTable {
 				}
 			}
 			else {
-				d.playsBjack(deck);
+				d.playsBjack(deck);// dealer plays on interface
 				if (d.getScore() > 21) {
 					System.out.println("\n" +p.getName()+" is a winner!");
 				}
